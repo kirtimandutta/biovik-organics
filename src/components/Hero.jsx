@@ -1,5 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
+import ScrollVideo from './ScrollVideo'
 
 export default function Hero() {
   const scrollToMission = () => {
@@ -13,16 +14,13 @@ export default function Hero() {
     >
       {/* Full-bleed visual plane */}
       <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 scale-105 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1530836369250-ef72a3f5c9c8?auto=format&fit=crop&w=2400&q=80')",
-          }}
+        <ScrollVideo
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/videos/hero.mp4"
         />
         <div className="cellular-grid absolute inset-0" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/[0.33] to-black/[0.18]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/[0.48] via-transparent to-black/[0.24]" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pb-28 pt-32 md:px-10 md:pb-32 lg:px-14">
@@ -39,9 +37,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-5xl font-display text-4xl font-bold uppercase leading-[0.95] tracking-[0.06em] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem]"
+          className="max-w-5xl font-display text-[1.575rem] font-bold uppercase leading-[0.95] tracking-[0.06em] text-white sm:text-[2.1rem] md:text-[2.625rem] lg:text-[3.15rem] xl:text-[3.85rem]"
         >
-          Boosting plant efficiency through biological engine
+          Boosting plant
+          <br />
+          efficiency through
+          <br />
+          biological engine
         </motion.h1>
 
         <motion.div

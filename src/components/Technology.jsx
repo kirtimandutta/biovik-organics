@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Dna, GitMerge, Zap } from 'lucide-react'
+import ScrollVideo from './ScrollVideo'
 
 const PHASES = [
   {
@@ -31,8 +32,17 @@ export default function Technology() {
   const ActiveIcon = PHASES[active].icon
 
   return (
-    <section id="technology" className="relative border-t border-zinc-800 bg-black">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32 lg:px-14 lg:py-40">
+    <section id="technology" className="relative overflow-hidden border-t border-zinc-800 bg-black">
+      <div className="absolute inset-0">
+        <ScrollVideo
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/videos/technology.mp4"
+        />
+        <div className="absolute inset-0 bg-black/[0.33]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/[0.24] to-black/[0.30]" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32 lg:px-14 lg:py-40">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +59,7 @@ export default function Technology() {
         </motion.div>
 
         {/* Desktop / tablet: interactive 3-phase grid */}
-        <div className="hidden border border-zinc-800 md:grid md:grid-cols-3">
+        <div className="hidden border border-white/15 md:grid md:grid-cols-3">
           {PHASES.map((phase, i) => {
             const Icon = phase.icon
             const isActive = active === i
@@ -59,17 +69,17 @@ export default function Technology() {
                 type="button"
                 onClick={() => setActive(i)}
                 onMouseEnter={() => setActive(i)}
-                className={`group relative flex min-h-[420px] flex-col border-zinc-800 p-8 text-left transition-colors duration-300 lg:p-10 ${
+                className={`group relative flex min-h-[420px] flex-col border-white/15 p-8 text-left transition-colors duration-300 lg:p-10 ${
                   i < PHASES.length - 1 ? 'md:border-r' : ''
-                } ${isActive ? 'bg-zinc-950' : 'bg-black hover:bg-zinc-950/60'}`}
+                } ${isActive ? 'bg-black/55' : 'bg-black/25 hover:bg-black/40'}`}
               >
                 <div className="mb-8 flex items-center justify-between">
-                  <span className="font-display text-sm font-semibold tracking-[0.3em] text-zinc-500">
+                  <span className="font-display text-sm font-semibold tracking-[0.3em] text-zinc-400">
                     {phase.subtitle}
                   </span>
                   <span
                     className={`font-display text-3xl font-bold tracking-widest transition-colors duration-300 ${
-                      isActive ? 'text-emerald-400' : 'text-zinc-700'
+                      isActive ? 'text-emerald-400' : 'text-zinc-500'
                     }`}
                   >
                     {phase.id}
@@ -80,7 +90,7 @@ export default function Technology() {
                   size={28}
                   strokeWidth={1.25}
                   className={`mb-6 transition-colors duration-300 ${
-                    isActive ? 'text-emerald-400' : 'text-zinc-600'
+                    isActive ? 'text-emerald-400' : 'text-zinc-500'
                   }`}
                 />
 
@@ -96,7 +106,7 @@ export default function Technology() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.35 }}
-                      className="mt-auto font-body text-sm font-light leading-relaxed text-zinc-400 lg:text-base"
+                      className="mt-auto font-body text-sm font-light leading-relaxed text-zinc-300 lg:text-base"
                     >
                       {phase.body}
                     </motion.p>
@@ -114,7 +124,7 @@ export default function Technology() {
         </div>
 
         {/* Mobile: vertical timeline */}
-        <div className="border border-zinc-800 md:hidden">
+        <div className="border border-white/15 bg-black/30 md:hidden">
           {PHASES.map((phase, i) => {
             const Icon = phase.icon
             return (
@@ -124,10 +134,10 @@ export default function Technology() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.6, delay: i * 0.08 }}
-                className={`border-zinc-800 p-6 ${i < PHASES.length - 1 ? 'border-b' : ''}`}
+                className={`border-white/15 p-6 ${i < PHASES.length - 1 ? 'border-b' : ''}`}
               >
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="font-display text-xs font-semibold tracking-[0.3em] text-zinc-500">
+                  <span className="font-display text-xs font-semibold tracking-[0.3em] text-zinc-400">
                     {phase.subtitle}
                   </span>
                   <span className="font-display text-2xl font-bold tracking-widest text-emerald-400">
@@ -138,7 +148,7 @@ export default function Technology() {
                 <h3 className="mb-3 font-display text-xl font-bold tracking-[0.18em] text-white">
                   {phase.title}
                 </h3>
-                <p className="font-body text-sm font-light leading-relaxed text-zinc-400">
+                <p className="font-body text-sm font-light leading-relaxed text-zinc-300">
                   {phase.body}
                 </p>
               </motion.div>
@@ -151,10 +161,10 @@ export default function Technology() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-8 hidden items-center gap-4 border border-zinc-800 px-6 py-4 md:flex"
+          className="mt-8 hidden items-center gap-4 border border-white/15 bg-black/40 px-6 py-4 md:flex"
         >
           <ActiveIcon size={18} strokeWidth={1.5} className="text-emerald-400" />
-          <p className="font-display text-xs font-semibold tracking-[0.25em] text-zinc-400">
+          <p className="font-display text-xs font-semibold tracking-[0.25em] text-zinc-300">
             ACTIVE PROTOCOL — {PHASES[active].subtitle.toUpperCase()}: {PHASES[active].title}
           </p>
         </motion.div>
