@@ -63,8 +63,17 @@ export default function Impact() {
   const inView = useInView(ref, { once: true, amount: 0.4 })
 
   return (
-    <section id="impact" className="relative border-t border-zinc-800 bg-black">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32 lg:px-14 lg:py-40">
+    <section id="impact" className="relative overflow-hidden border-t border-zinc-800 bg-black">
+      <div className="absolute inset-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/impact-backdrop.png')" }}
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/45" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32 lg:px-14 lg:py-40">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +91,7 @@ export default function Impact() {
 
         <div
           ref={ref}
-          className="grid border border-zinc-800 md:grid-cols-3"
+          className="grid border border-white/15 bg-black/30 md:grid-cols-3"
         >
           {METRICS.map((metric, i) => (
             <motion.div
@@ -97,7 +106,7 @@ export default function Impact() {
               }}
               className={`flex flex-col items-start px-6 py-12 md:px-8 md:py-16 lg:px-10 ${
                 i < METRICS.length - 1
-                  ? 'border-b border-zinc-800 md:border-b-0 md:border-r'
+                  ? 'border-b border-white/15 md:border-b-0 md:border-r'
                   : ''
               }`}
             >
@@ -110,7 +119,7 @@ export default function Impact() {
                   active={inView}
                 />
               </p>
-              <p className="mt-6 font-display text-xs font-semibold tracking-[0.28em] text-zinc-500 md:text-sm">
+              <p className="mt-6 font-display text-xs font-semibold tracking-[0.28em] text-zinc-300 md:text-sm">
                 {metric.label}
               </p>
             </motion.div>

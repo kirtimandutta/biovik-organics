@@ -37,9 +37,11 @@ export default function Technology() {
         <ScrollVideo
           className="absolute inset-0 h-full w-full object-cover"
           src="/videos/technology.mp4"
+          playAt="section-center"
         />
-        <div className="absolute inset-0 bg-black/[0.33]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/[0.24] to-black/[0.30]" />
+        {/* Same overlay stack as Mission, at 70% intensity */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/[0.42] via-black/[0.231] to-black/[0.147]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/[0.315] via-black/[0.168] to-black/[0.21]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32 lg:px-14 lg:py-40">
