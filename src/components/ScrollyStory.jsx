@@ -112,7 +112,7 @@ export default function ScrollyStory() {
           ref={videoRef}
           id="bg-video"
           className="h-full w-full object-cover"
-          src="/videos/story.mp4?v=smooth2"
+          src="/videos/story.mp4?v=1080p45"
           muted
           playsInline
           preload="auto"
