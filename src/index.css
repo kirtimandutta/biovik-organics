@@ -60,6 +60,15 @@ body {
   animation: bounce-soft 2.4s ease-in-out infinite;
 }
 
+.scrolly-sticky {
+  width: 100vw;
+  max-width: 100%;
+}
+
+.scrolly-overlay section {
+  position: relative;
+}
+
 @keyframes bounce-soft {
   0%,
   100% {

@@ -32,10 +32,10 @@ export default function Technology() {
   const ActiveIcon = PHASES[active].icon
 
   return (
-    <section id="technology" className="relative overflow-hidden border-t border-zinc-800 bg-black">
-      <div className="absolute inset-0">
+    <section id="technology" className="section relative border-t border-zinc-800 bg-black">
+      <div className="video-container">
         <ScrollVideo
-          className="absolute inset-0 h-full w-full object-cover"
+          className="h-full w-full object-cover"
           src="/videos/technology.mp4"
           playAt="section-center"
         />

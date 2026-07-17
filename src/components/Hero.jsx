@@ -10,12 +10,11 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-svh w-full items-end overflow-hidden bg-black"
+      className="section section--clip relative flex w-full items-end bg-black"
     >
-      {/* Full-bleed visual plane */}
-      <div className="absolute inset-0">
+      <div className="video-container">
         <ScrollVideo
-          className="absolute inset-0 h-full w-full object-cover"
+          className="h-full w-full object-cover"
           src="/videos/hero.mp4"
         />
         <div className="cellular-grid absolute inset-0" />

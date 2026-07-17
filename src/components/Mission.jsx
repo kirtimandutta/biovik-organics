@@ -13,10 +13,10 @@ export default function Mission() {
   const [expanded, setExpanded] = useState(false)
 
   return (
-    <section id="mission" className="relative flex min-h-svh w-full items-center overflow-hidden bg-black">
-      <div className="absolute inset-0">
+    <section id="mission" className="section section--clip relative flex w-full items-center bg-black">
+      <div className="video-container">
         <ScrollVideo
-          className="absolute inset-0 h-full w-full object-cover"
+          className="h-full w-full object-cover"
           src="/videos/mission.mp4"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/[0.33] to-black/[0.21]" />
