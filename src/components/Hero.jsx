@@ -23,14 +23,18 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pb-28 pt-32 md:px-10 md:pb-32 lg:px-14">
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="mb-5 font-display text-xs font-semibold tracking-[0.35em] text-emerald-400 md:text-sm"
+          className="mb-5"
         >
-          BIOVIK ORGANICS
-        </motion.p>
+          <img
+            src="/assets/brand/biovik-logo.png"
+            alt="Biovik"
+            className="h-8 w-auto object-contain md:h-10"
+          />
+        </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 40 }}

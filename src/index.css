@@ -4,6 +4,9 @@
   --font-display: "Barlow Condensed", sans-serif;
   --font-body: "Barlow", sans-serif;
   --color-biovik: #10b981;
+  --color-biovik-cyan: #00f2fe;
+  --color-cyan-400: #00f2fe;
+  --color-surface: #0a0a0c;
 }
 
 html {
@@ -13,7 +16,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
-  background-color: #000;
+  background-color: #0a0a0c;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,17 +1,23 @@
-import Navbar from './components/Navbar'
-import ScrollyStory from './components/ScrollyStory'
-import Impact from './components/Impact'
-import Company from './components/Company'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import Process from './pages/Process'
+import Products from './pages/Products'
+import Rnd from './pages/Rnd'
+import Contact from './pages/Contact'
 
 export default function App() {
   return (
-    <div className="min-h-svh bg-black text-white">
-      <Navbar />
-      <main>
-        <ScrollyStory />
-        <Impact />
-        <Company />
-      </main>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="process" element={<Process />} />
+          <Route path="products" element={<Products />} />
+          <Route path="rnd" element={<Rnd />} />
+          <Route path="contact" element={<Contact />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }

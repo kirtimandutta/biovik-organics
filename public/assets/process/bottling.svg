@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" fill="none">
+  <rect width="320" height="200" fill="#08080a"/>
+  <path d="M138 48h44v12h-6v88c0 12-10 22-22 22s-22-10-22-22V60h-6V48z" stroke="#00f2fe" stroke-opacity="0.55" stroke-width="1.5"/>
+  <path d="M144 108h32v28c0 6-5 12-10 12h-12c-5 0-10-6-10-12v-28z" fill="#10b981" fill-opacity="0.35"/>
+  <path d="M152 48V36h16v12" stroke="#00f2fe" stroke-opacity="0.4" stroke-width="1.5"/>
+  <rect x="150" y="58" width="20" height="6" fill="#00f2fe" fill-opacity="0.3"/>
+  <path d="M200 70h36M200 90h28M200 110h36" stroke="#ffffff" stroke-opacity="0.15" stroke-width="1"/>
+  <circle cx="246" cy="70" r="3" fill="#10b981"/>
+  <circle cx="238" cy="90" r="3" fill="#00f2fe"/>
+  <circle cx="246" cy="110" r="3" fill="#10b981"/>
+  <text x="160" y="175" text-anchor="middle" fill="#00f2fe" fill-opacity="0.5" font-family="sans-serif" font-size="9" letter-spacing="2">CURAMIX</text>
+</svg>

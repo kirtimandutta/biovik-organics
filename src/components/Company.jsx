@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const SPECS = [
@@ -16,7 +17,7 @@ const SPECS = [
 
 export default function Company() {
   return (
-    <section id="company" className="relative border-t border-zinc-800 bg-black">
+    <section id="company" className="relative border-t border-zinc-800 bg-[#0a0a0c]">
       <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32 lg:px-14 lg:py-36">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -72,28 +73,34 @@ export default function Company() {
           <div className="flex flex-wrap items-center gap-6">
             <a
               href="mailto:harshchandak97@gmail.com"
-              className="font-display text-xs font-semibold tracking-[0.2em] text-zinc-400 transition-colors hover:text-emerald-400"
+              className="font-display text-xs font-semibold tracking-[0.2em] text-zinc-400 transition-colors hover:text-cyan-400"
             >
               harshchandak97@gmail.com
             </a>
-            <a
-              href="#mission"
+            <Link
+              to="/process"
               className="font-display text-xs font-semibold tracking-[0.2em] text-zinc-500 transition-colors hover:text-white"
             >
-              MISSION
-            </a>
-            <a
-              href="#technology"
+              PROCESS
+            </Link>
+            <Link
+              to="/products"
               className="font-display text-xs font-semibold tracking-[0.2em] text-zinc-500 transition-colors hover:text-white"
             >
-              TECHNOLOGY
-            </a>
-            <a
-              href="#impact"
+              PRODUCTS
+            </Link>
+            <Link
+              to="/rnd"
               className="font-display text-xs font-semibold tracking-[0.2em] text-zinc-500 transition-colors hover:text-white"
             >
-              IMPACT
-            </a>
+              R&D
+            </Link>
+            <Link
+              to="/contact"
+              className="font-display text-xs font-semibold tracking-[0.2em] text-zinc-500 transition-colors hover:text-white"
+            >
+              CONTACT
+            </Link>
           </div>
         </div>
       </footer>

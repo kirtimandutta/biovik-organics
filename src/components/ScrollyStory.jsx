@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -135,15 +136,19 @@ export default function ScrollyStory() {
             style={panelStyle(0)}
           >
             <div className="pointer-events-auto mx-auto w-full max-w-[1400px]">
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.6 }}
                 transition={{ duration: 0.7 }}
-                className="mb-5 font-display text-xs font-semibold tracking-[0.35em] text-emerald-400 md:text-sm"
+                className="mb-5"
               >
-                BIOVIK ORGANICS
-              </motion.p>
+                <img
+                  src="/assets/brand/biovik-logo.png"
+                  alt="Biovik"
+                  className="h-8 w-auto object-contain md:h-10"
+                />
+              </motion.div>
               <motion.h1
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -164,13 +169,12 @@ export default function ScrollyStory() {
                 transition={{ duration: 0.7, delay: 0.15 }}
                 className="mt-10"
               >
-                <button
-                  type="button"
-                  onClick={scrollToMission}
-                  className="border border-white px-8 py-3 font-display text-sm font-semibold tracking-[0.28em] text-white transition-all duration-300 hover:bg-white hover:text-black"
+                <Link
+                  to="/process"
+                  className="inline-block border border-white px-8 py-3 font-display text-sm font-semibold tracking-[0.28em] text-white transition-all duration-300 hover:bg-white hover:text-black"
                 >
                   LEARN MORE
-                </button>
+                </Link>
               </motion.div>
             </div>
             <button
