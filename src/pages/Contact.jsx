@@ -33,9 +33,10 @@ export default function Contact() {
   }
 
   return (
-    <div className="relative min-h-svh overflow-hidden bg-[#0a0a0c]">
-      <div className="cellular-grid pointer-events-none absolute inset-0 opacity-40" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(16,185,129,0.07),_transparent_55%)]" />
+    <div className="relative min-h-svh overflow-hidden bg-[#1a0a2e]">
+      <div className="cellular-grid pointer-events-none absolute inset-0 opacity-30" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(155deg,#2e1065_0%,#5b21b6_42%,#7c3aed_72%,#4c1d95_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(192,132,252,0.35),_transparent_55%)]" />
 
       <div className="relative mx-auto grid max-w-[1400px] gap-14 px-5 pb-24 pt-28 md:px-10 md:pb-32 md:pt-36 lg:grid-cols-[1fr_1.15fr] lg:gap-20 lg:px-14">
         <motion.header

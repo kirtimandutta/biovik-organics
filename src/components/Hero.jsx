@@ -23,30 +23,17 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pb-28 pt-32 md:px-10 md:pb-32 lg:px-14">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="mb-5"
-        >
-          <img
-            src="/assets/brand/biovik-logo.png"
-            alt="Biovik"
-            className="h-8 w-auto object-contain md:h-10"
-          />
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-5xl font-display text-[1.575rem] font-bold uppercase leading-[0.95] tracking-[0.06em] text-white sm:text-[2.1rem] md:text-[2.625rem] lg:text-[3.15rem] xl:text-[3.85rem]"
         >
-          Boosting plant
+          Democratising
           <br />
-          efficiency through
+          food
           <br />
-          biological engine
+          security
         </motion.h1>
 
         <motion.div

@@ -60,7 +60,16 @@ body {
 }
 
 .scroll-indicator {
-  animation: bounce-soft 2.4s ease-in-out infinite;
+  animation: bounce-soft-x 2.4s ease-in-out infinite;
+}
+
+.scrolly-story {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.scrolly-story::-webkit-scrollbar {
+  display: none;
 }
 
 .scrolly-sticky {
@@ -72,12 +81,12 @@ body {
   position: relative;
 }
 
-@keyframes bounce-soft {
+@keyframes bounce-soft-x {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateX(0);
   }
   50% {
-    transform: translateY(8px);
+    transform: translateX(8px);
   }
 }
