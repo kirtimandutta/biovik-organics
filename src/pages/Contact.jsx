@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Send } from 'lucide-react'
 
@@ -14,6 +15,7 @@ const inputClass =
   'w-full border border-white/10 bg-white/[0.04] px-4 py-3.5 font-body text-sm text-white outline-none backdrop-blur-md transition-all placeholder:text-zinc-600 focus:border-cyan-400/50 focus:bg-white/[0.06] focus:shadow-[0_0_24px_rgba(0,242,254,0.08)]'
 
 export default function Contact() {
+  const [searchParams] = useSearchParams()
   const [submitted, setSubmitted] = useState(false)
   const [form, setForm] = useState({
     name: '',
@@ -21,6 +23,23 @@ export default function Contact() {
     inquiry: INQUIRY_TYPES[0],
     message: '',
   })
+
+  useEffect(() => {
+    const product = searchParams.get('product')
+    const inquiry = searchParams.get('inquiry')
+    const nextInquiry =
+      inquiry && INQUIRY_TYPES.includes(inquiry) ? inquiry : product ? 'Product Inquiry' : null
+
+    setForm((prev) => ({
+      ...prev,
+      ...(nextInquiry ? { inquiry: nextInquiry } : {}),
+      ...(product
+        ? {
+            message: `Soil report submission for ${product}.\n\nCrop type:\nGrowing cycle:\nAdditional notes:\n`,
+          }
+        : {}),
+    }))
+  }, [searchParams])
 
   const onChange = (e) => {
     const { name, value } = e.target
