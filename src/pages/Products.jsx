@@ -1,57 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Box, FileUp } from 'lucide-react'
-
-const PRODUCTS = [
-  {
-    id: 'curamix',
-    name: 'CuraMix',
-    badge: 'FERTILISER',
-    tagline: 'Curated Organic Soil Blend',
-    description:
-      'CURA MIX is a curated fertiliser by Biovik. Just share your soil test report, crop type, and growing cycle — we curate the right organic blend tailored specifically for your field.',
-    image: '/assets/products/curamix.png',
-    imageFallback: '/assets/products/curamix.svg',
-    cta: {
-      label: 'Submit Soil Report',
-      to: '/contact?product=CuraMix&inquiry=Product%20Inquiry',
-    },
-  },
-  {
-    id: 'bio-bloom',
-    name: 'Bio-Bloom',
-    badge: 'HORTICULTURE',
-    tagline: 'Organic Bloom Booster',
-    description:
-      'Bio-Bloom is an organic bloom booster by Biovik for fruits and flowers, designed to support healthier blooms, better fruit set, and improved overall yield when sprayed during the flowering and fruiting stage.',
-    spec: 'Flowering & Fruiting Stage',
-    image: '/assets/products/bio-bloom.png',
-    imageFallback: '/assets/products/bio-bloom.svg',
-  },
-  {
-    id: 'bio-reaper',
-    name: 'Bio Reaper',
-    badge: 'WEEDICIDE',
-    tagline: 'Root-Level Organic Weed Control',
-    description:
-      'Bio Reaper is a first-of-its-kind organic weedicide designed to eliminate targeted weeds at the root level. It destroys the mechanism of photosynthesis and prevents further growth at the tissue level by disrupting Xylem & Phloem transport.',
-    spec: 'Photosynthesis & Vascular (Xylem/Phloem) Disruption',
-    image: '/assets/products/bio-reaper.png',
-    imageFallback: '/assets/products/bio-reaper.svg',
-  },
-  {
-    id: 'trishul',
-    name: 'Trishul',
-    badge: 'PREVENTIVE PEST CONTROL',
-    tagline: 'Eco-Friendly Crop Protection',
-    description:
-      'Trishul is a first-of-its-kind organic pest control solution by Biovik that helps protect crops from pest attacks while remaining completely safe for humans, soil, and groundwater. It operates on a preventive, nature-friendly approach to foster a cleaner farm ecosystem.',
-    spec: 'Human, Soil & Groundwater Safe',
-    image: '/assets/products/trishul.png',
-    imageFallback: '/assets/products/trishul.svg',
-  },
-]
+import { ArrowRight, Box, FileUp } from 'lucide-react'
+import { productList } from '../data/productsData'
 
 function ProductMedia({ src, fallback, name }) {
   const [failed, setFailed] = useState(false)
@@ -112,13 +63,10 @@ export default function Products() {
       const cards = cardsRef.current
       if (!vid || !cards || !vid.duration || Number.isNaN(vid.duration)) return
 
-      // Absolute document Y of the cards grid (reliable vs nested offsetTop)
       const cardsTop = cards.getBoundingClientRect().top + window.scrollY
       const scrollTriggerDistance = Math.max(1, cardsTop - window.innerHeight * 0.3)
-
       const progress = Math.max(0, Math.min(1, window.scrollY / scrollTriggerDistance))
 
-      // At / past cards zone — lock final frame (no black buffer)
       if (progress >= 1) {
         lockFinalFrame()
         return
@@ -151,7 +99,6 @@ export default function Products() {
 
   return (
     <div className="relative min-h-svh bg-[#08080a] pb-32 pt-24 text-white">
-      {/* Fixed full-screen background video */}
       <div className="pointer-events-none fixed inset-0 z-0 h-full w-full overflow-hidden">
         <video
           ref={videoRef}
@@ -165,7 +112,6 @@ export default function Products() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#08080a]/80 via-[#08080a]/30 to-[#08080a]/90" />
       </div>
 
-      {/* Overlay content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
         <motion.header
           initial={{ opacity: 0, y: 24 }}
@@ -188,53 +134,72 @@ export default function Products() {
           </div>
         </motion.header>
 
-        {/* Cards = scrub completion trigger; video freezes on last frame behind them */}
         <div ref={cardsRef} className="grid gap-8 pt-12 md:grid-cols-2">
-          {PRODUCTS.map((product, i) => (
-            <motion.article
-              key={product.id}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, delay: 0.05 + i * 0.07 }}
-              className="group flex flex-col rounded-3xl border border-white/10 bg-black/60 p-8 shadow-[0_0_30px_rgba(0,0,0,0.8)] backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/60"
-            >
-              <div className="relative mb-6 flex h-40 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-black/40 md:h-48">
-                <ProductMedia
-                  src={product.image}
-                  fallback={product.imageFallback}
-                  name={product.name}
-                />
-              </div>
-
-              <p className="mb-1 font-mono text-xs uppercase tracking-widest text-cyan-400">
-                {product.badge}
-              </p>
-              <h2 className="mb-2 text-3xl font-bold text-white">{product.name}</h2>
-              <p className="mb-4 font-display text-xs tracking-[0.16em] text-emerald-400/90">
-                {product.tagline}
-              </p>
-              <p className="mb-8 flex-1 text-sm leading-relaxed text-zinc-300">
-                {product.description}
-              </p>
-
-              {product.spec && (
-                <span className="inline-block rounded-lg border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] uppercase tracking-widest text-cyan-300">
-                  {product.spec}
-                </span>
-              )}
-
-              {product.cta && (
+          {productList.map((product, i) => {
+            const detailTo = `/products/${product.id}`
+            return (
+              <motion.article
+                key={product.id}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55, delay: 0.05 + i * 0.07 }}
+                className="group flex flex-col rounded-3xl border border-white/10 bg-black/60 p-8 shadow-[0_0_30px_rgba(0,0,0,0.8)] backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/60"
+              >
                 <Link
-                  to={product.cta.to}
-                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-400/50 bg-cyan-500/10 px-6 py-3 text-xs uppercase tracking-widest text-cyan-400 transition-all hover:bg-cyan-400 hover:text-black"
+                  to={detailTo}
+                  className="relative mb-6 flex h-40 items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-black/40 transition-opacity hover:opacity-90 md:h-48"
                 >
-                  <FileUp size={14} strokeWidth={1.75} />
-                  {product.cta.label}
+                  <ProductMedia
+                    src={product.image}
+                    fallback={product.imageFallback}
+                    name={product.name}
+                  />
                 </Link>
-              )}
-            </motion.article>
-          ))}
+
+                <p className="mb-1 font-mono text-xs uppercase tracking-widest text-cyan-400">
+                  {product.category}
+                </p>
+                <Link to={detailTo}>
+                  <h2 className="mb-2 text-3xl font-bold text-white transition-colors hover:text-cyan-400">
+                    {product.name}
+                  </h2>
+                </Link>
+                <p className="mb-4 font-display text-xs tracking-[0.16em] text-emerald-400/90">
+                  {product.tagline}
+                </p>
+                <p className="mb-6 flex-1 text-sm leading-relaxed text-zinc-300">
+                  {product.description}
+                </p>
+
+                {product.specs?.[0] && (
+                  <span className="mb-6 inline-block w-fit rounded-lg border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] uppercase tracking-widest text-cyan-300">
+                    {product.specs[0]}
+                  </span>
+                )}
+
+                <div className="mt-auto flex flex-col gap-3">
+                  <Link
+                    to={detailTo}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-400/50 bg-cyan-500/10 px-6 py-3 text-xs uppercase tracking-widest text-cyan-400 transition-all hover:bg-cyan-400 hover:text-black"
+                  >
+                    Know More
+                    <ArrowRight size={14} strokeWidth={1.75} />
+                  </Link>
+
+                  {product.contactCta && (
+                    <Link
+                      to={product.contactCta.to}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-xs uppercase tracking-widest text-zinc-300 transition-all hover:border-cyan-400/40 hover:text-cyan-400"
+                    >
+                      <FileUp size={14} strokeWidth={1.75} />
+                      {product.contactCta.label}
+                    </Link>
+                  )}
+                </div>
+              </motion.article>
+            )
+          })}
         </div>
       </div>
     </div>

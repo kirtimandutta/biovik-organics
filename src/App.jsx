@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import Process from './pages/Process'
 import Products from './pages/Products'
+import ProductDetail from './pages/ProductDetail'
 import Rnd from './pages/Rnd'
 import Contact from './pages/Contact'
 
@@ -14,6 +15,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="process" element={<Process />} />
           <Route path="products" element={<Products />} />
+          <Route path="products/:productId" element={<ProductDetail />} />
           <Route path="rnd" element={<Rnd />} />
           <Route path="contact" element={<Contact />} />
         </Route>

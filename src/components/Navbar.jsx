@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { NavLink, Link, useLocation } from 'react-router-dom'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { productList } from '../data/productsData'
 
 const NAV_LINKS = [
   { label: 'PROCESS', to: '/process' },
-  { label: 'PRODUCTS', to: '/products' },
+  { label: 'PRODUCTS', to: '/products', dropdown: true },
   { label: 'R&D', to: '/rnd' },
   { label: 'CONTACT', to: '/contact' },
 ]
@@ -16,8 +17,13 @@ const linkClass = ({ isActive }) =>
   }`
 
 export default function Navbar() {
+  const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [productsOpen, setProductsOpen] = useState(false)
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
+  const dropdownRef = useRef(null)
+  const productsActive = location.pathname.startsWith('/products')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -32,6 +38,22 @@ export default function Navbar() {
       document.body.style.overflow = ''
     }
   }, [open])
+
+  useEffect(() => {
+    setProductsOpen(false)
+    setMobileProductsOpen(false)
+    setOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    const onPointerDown = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setProductsOpen(false)
+      }
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => document.removeEventListener('pointerdown', onPointerDown)
+  }, [])
 
   return (
     <>
@@ -57,13 +79,93 @@ export default function Navbar() {
           </Link>
 
           <ul className="hidden items-center gap-8 lg:flex xl:gap-10">
-            {NAV_LINKS.map((link) => (
-              <li key={link.to}>
-                <NavLink to={link.to} className={linkClass}>
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.dropdown ? (
+                <li
+                  key={link.to}
+                  ref={dropdownRef}
+                  className="relative"
+                  onMouseEnter={() => setProductsOpen(true)}
+                  onMouseLeave={() => setProductsOpen(false)}
+                >
+                  <div
+                    className={`inline-flex items-center gap-1.5 font-display text-sm font-semibold tracking-[0.22em] transition-colors ${
+                      productsActive ? 'text-cyan-400' : 'text-white/90'
+                    }`}
+                  >
+                    <Link to="/products" className="hover:text-cyan-400">
+                      {link.label}
+                    </Link>
+                    <button
+                      type="button"
+                      aria-label="Open products menu"
+                      aria-expanded={productsOpen}
+                      aria-haspopup="true"
+                      onClick={() => setProductsOpen((v) => !v)}
+                      className="rounded p-0.5 hover:text-cyan-400"
+                    >
+                      <ChevronDown
+                        size={14}
+                        strokeWidth={2}
+                        className={`transition-transform duration-200 ${productsOpen ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+                  </div>
+
+                  <AnimatePresence>
+                    {productsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.18 }}
+                        className="absolute left-1/2 top-full z-50 mt-3 w-56 -translate-x-1/2 rounded-xl border border-white/10 bg-black/90 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-xl"
+                      >
+                        <Link
+                          to="/products"
+                          className={`mb-1 block rounded-lg px-3 py-2.5 font-display text-xs tracking-[0.2em] transition-colors ${
+                            location.pathname === '/products'
+                              ? 'bg-cyan-400/10 text-cyan-400'
+                              : 'text-zinc-300 hover:bg-white/5 hover:text-cyan-400'
+                          }`}
+                        >
+                          ALL FORMULATIONS
+                        </Link>
+                        <div className="my-1 h-px bg-white/10" />
+                        {productList.map((product) => {
+                          const to = `/products/${product.id}`
+                          const active = location.pathname === to
+                          return (
+                            <Link
+                              key={product.id}
+                              to={to}
+                              className={`block rounded-lg px-3 py-2.5 transition-colors ${
+                                active
+                                  ? 'bg-cyan-400/10 text-cyan-400'
+                                  : 'text-zinc-300 hover:bg-white/5 hover:text-cyan-400'
+                              }`}
+                            >
+                              <span className="block font-display text-xs tracking-[0.16em]">
+                                {product.name}
+                              </span>
+                              <span className="mt-0.5 block font-mono text-[9px] tracking-widest text-zinc-500">
+                                {product.category}
+                              </span>
+                            </Link>
+                          )
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              ) : (
+                <li key={link.to}>
+                  <NavLink to={link.to} className={linkClass}>
+                    {link.label}
+                  </NavLink>
+                </li>
+              ),
+            )}
           </ul>
 
           <button
@@ -85,29 +187,83 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 bg-[#0a0a0c]/95 backdrop-blur-md lg:hidden"
+            className="fixed inset-0 z-40 overflow-y-auto bg-[#0a0a0c]/95 backdrop-blur-md lg:hidden"
           >
-            <div className="flex h-full flex-col justify-center gap-2 px-8 pt-16">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.to}
-                  initial={{ opacity: 0, x: 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 + i * 0.06 }}
-                >
-                  <NavLink
-                    to={link.to}
-                    onClick={() => setOpen(false)}
-                    className={({ isActive }) =>
-                      `block border-b border-white/10 py-5 font-display text-2xl font-bold tracking-[0.2em] transition-colors ${
-                        isActive ? 'text-cyan-400' : 'text-white hover:text-cyan-400'
-                      }`
-                    }
+            <div className="flex min-h-full flex-col justify-center gap-2 px-8 py-24">
+              {NAV_LINKS.map((link, i) =>
+                link.dropdown ? (
+                  <motion.div
+                    key={link.to}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.08 + i * 0.06 }}
+                    className="border-b border-white/10"
                   >
-                    {link.label}
-                  </NavLink>
-                </motion.div>
-              ))}
+                    <div className="flex items-center justify-between py-5">
+                      <Link
+                        to="/products"
+                        onClick={() => setOpen(false)}
+                        className={`font-display text-2xl font-bold tracking-[0.2em] transition-colors ${
+                          productsActive ? 'text-cyan-400' : 'text-white hover:text-cyan-400'
+                        }`}
+                      >
+                        PRODUCTS
+                      </Link>
+                      <button
+                        type="button"
+                        aria-label="Toggle products list"
+                        onClick={() => setMobileProductsOpen((v) => !v)}
+                        className="text-white/70 hover:text-cyan-400"
+                      >
+                        <ChevronDown
+                          size={22}
+                          className={`transition-transform ${mobileProductsOpen ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                    </div>
+                    <AnimatePresence>
+                      {mobileProductsOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden pb-4"
+                        >
+                          {productList.map((product) => (
+                            <Link
+                              key={product.id}
+                              to={`/products/${product.id}`}
+                              onClick={() => setOpen(false)}
+                              className="block py-3 pl-2 font-display text-lg tracking-[0.16em] text-zinc-300 transition-colors hover:text-cyan-400"
+                            >
+                              {product.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={link.to}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.08 + i * 0.06 }}
+                  >
+                    <NavLink
+                      to={link.to}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) =>
+                        `block border-b border-white/10 py-5 font-display text-2xl font-bold tracking-[0.2em] transition-colors ${
+                          isActive ? 'text-cyan-400' : 'text-white hover:text-cyan-400'
+                        }`
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  </motion.div>
+                ),
+              )}
             </div>
           </motion.div>
         )}
