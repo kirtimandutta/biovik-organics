@@ -160,8 +160,8 @@ export default function ScrollyStory() {
           className="pointer-events-none absolute inset-0"
           style={{
             background: [
-              'radial-gradient(ellipse at center, transparent 18%, rgba(91,33,182,0.21) 55%, rgba(46,16,101,0.43) 78%, rgba(26,10,46,0.55) 100%)',
-              'linear-gradient(155deg, rgba(46,16,101,0.27) 0%, rgba(91,33,182,0.17) 42%, rgba(124,58,237,0.13) 72%, rgba(76,29,149,0.24) 100%)',
+              'radial-gradient(ellipse at center, transparent 18%, rgba(91,33,182,0.08) 55%, rgba(46,16,101,0.16) 78%, rgba(26,10,46,0.20) 100%)',
+              'linear-gradient(155deg, rgba(46,16,101,0.10) 0%, rgba(91,33,182,0.06) 42%, rgba(124,58,237,0.05) 72%, rgba(76,29,149,0.08) 100%)',
             ].join(', '),
           }}
         />
