@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { label: 'PROCESS', to: '/process' },
   { label: 'PRODUCTS', to: '/products', dropdown: true },
   { label: 'R&D', to: '/rnd' },
+  { label: 'ABOUT US', to: '/about' },
   { label: 'CONTACT', to: '/contact' },
 ]
 

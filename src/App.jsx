@@ -5,6 +5,7 @@ import Process from './pages/Process'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Rnd from './pages/Rnd'
+import About from './pages/About'
 import Contact from './pages/Contact'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="products" element={<Products />} />
           <Route path="products/:productId" element={<ProductDetail />} />
           <Route path="rnd" element={<Rnd />} />
+          <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>

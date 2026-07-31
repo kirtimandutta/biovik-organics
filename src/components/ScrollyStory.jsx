@@ -124,7 +124,7 @@ export default function ScrollyStory() {
           ref={heroVideoRef}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
           style={{ opacity: activePanel === 0 ? 1 : 0 }}
-          src="/videos/hero-section.mp4?v=1"
+          src="/videos/hero-section.mp4?v=1440"
           muted
           playsInline
           preload="auto"
@@ -133,7 +133,7 @@ export default function ScrollyStory() {
           ref={missionVideoRef}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
           style={{ opacity: activePanel === 1 ? 1 : 0 }}
-          src="/videos/mission-section.mp4?v=1"
+          src="/videos/mission-section.mp4?v=1440"
           muted
           playsInline
           preload="auto"
@@ -142,30 +142,23 @@ export default function ScrollyStory() {
           ref={techVideoRef}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
           style={{ opacity: activePanel === 2 ? 1 : 0 }}
-          src="/videos/tech-section.mp4?v=1"
+          src="/videos/tech-section.mp4?v=1440"
           muted
           playsInline
           preload="auto"
         />
         <video
           ref={ctaVideoRef}
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
-          style={{ opacity: activePanel === 3 ? 1 : 0 }}
-          src="/videos/cta-section.mp4?v=1"
+          className="absolute inset-x-0 top-0 w-full object-cover object-top transition-opacity duration-500"
+          style={{
+            opacity: activePanel === 3 ? 1 : 0,
+            height: 'calc(100% + 70px)',
+          }}
+          src="/videos/cta-section.mp4?v=1440"
           muted
           playsInline
           preload="auto"
         />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background: [
-              'radial-gradient(ellipse at center, transparent 18%, rgba(91,33,182,0.08) 55%, rgba(46,16,101,0.16) 78%, rgba(26,10,46,0.20) 100%)',
-              'linear-gradient(155deg, rgba(46,16,101,0.10) 0%, rgba(91,33,182,0.06) 42%, rgba(124,58,237,0.05) 72%, rgba(76,29,149,0.08) 100%)',
-            ].join(', '),
-          }}
-        />
-        <div className="cellular-grid pointer-events-none absolute inset-0 opacity-60" />
       </div>
 
       {/* Four equal vertical sections stacked over the sticky video */}
