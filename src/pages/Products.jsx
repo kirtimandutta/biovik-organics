@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, Box, FileUp } from 'lucide-react'
@@ -48,101 +48,22 @@ function ProductMedia({ src, fallback, name }) {
 }
 
 export default function Products() {
-  const videoRef = useRef(null)
-  const cardsRef = useRef(null)
-  const frozenRef = useRef(false)
-  const [isVideoReady, setIsVideoReady] = useState(false)
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video || !isVideoReady) return undefined
-
-    video.pause()
-    video.loop = false
-    frozenRef.current = false
-
-    const lockFinalFrame = () => {
-      const vid = videoRef.current
-      if (!vid?.duration || Number.isNaN(vid.duration)) return
-      const finalTime = Math.max(0, vid.duration - 0.05)
-      try {
-        if (Math.abs(vid.currentTime - finalTime) > 0.01) {
-          vid.currentTime = finalTime
-        }
-      } catch {
-        // ignore mid-seek race
-      }
-      frozenRef.current = true
-    }
-
-    const handleScroll = () => {
-      const vid = videoRef.current
-      const cards = cardsRef.current
-      if (!vid || !cards || !vid.duration || Number.isNaN(vid.duration)) return
-
-      const cardsTop = cards.getBoundingClientRect().top + window.scrollY
-      const scrollTriggerDistance = Math.max(1, cardsTop - window.innerHeight * 0.3)
-      const progress = Math.max(0, Math.min(1, window.scrollY / scrollTriggerDistance))
-
-      if (progress >= 1) {
-        lockFinalFrame()
-        return
-      }
-
-      frozenRef.current = false
-      const maxDuration = Math.max(0, vid.duration - 0.05)
-      const targetTime = maxDuration * progress
-
-      requestAnimationFrame(() => {
-        if (!videoRef.current) return
-        try {
-          if (Math.abs(videoRef.current.currentTime - targetTime) > 0.02) {
-            videoRef.current.currentTime = targetTime
-          }
-        } catch {
-          // ignore mid-seek race
-        }
-      })
-    }
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleScroll)
-    }
-  }, [isVideoReady])
-
   return (
-    <div className="relative min-h-svh bg-[#08080a] pb-32 pt-24 text-white">
-      <div className="pointer-events-none fixed inset-0 z-0 h-full w-full overflow-hidden">
-        <motion.video
-          ref={videoRef}
-          src="/assets/videos/biovik-products-showcase.mp4"
-          className="h-full w-full scale-105 object-cover brightness-110 contrast-125"
-          muted
-          playsInline
-          preload="auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isVideoReady ? 0.6 : 0 }}
-          transition={{ duration: 1.1, ease: easeOut }}
-          onLoadedMetadata={() => setIsVideoReady(true)}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08080a]/80 via-[#08080a]/30 to-[#08080a]/90" />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: [
-              'radial-gradient(ellipse at center, transparent 18%, rgba(91,33,182,0.11) 55%, rgba(46,16,101,0.22) 78%, rgba(26,10,46,0.28) 100%)',
-              'linear-gradient(155deg, rgba(46,16,101,0.14) 0%, rgba(91,33,182,0.08) 42%, rgba(124,58,237,0.07) 72%, rgba(76,29,149,0.12) 100%)',
-            ].join(', '),
-          }}
-        />
-      </div>
+    <div className="relative min-h-svh overflow-hidden bg-[#08080a] pb-32 pt-28 text-white md:pt-32">
+      <div className="cellular-grid pointer-events-none absolute inset-0 opacity-35" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(0,242,254,0.07),_transparent_55%)]" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: [
+            'radial-gradient(ellipse at center, transparent 18%, rgba(91,33,182,0.11) 55%, rgba(46,16,101,0.22) 78%, rgba(26,10,46,0.28) 100%)',
+            'linear-gradient(155deg, rgba(46,16,101,0.14) 0%, rgba(91,33,182,0.08) 42%, rgba(124,58,237,0.07) 72%, rgba(76,29,149,0.12) 100%)',
+          ].join(', '),
+        }}
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
-        <header className="mb-16 flex min-h-[70vh] flex-col justify-center pt-8">
+        <header className="mb-14 max-w-3xl md:mb-16">
           <motion.p
             {...fadeUp}
             transition={{ duration: 0.7, delay: 0.05, ease: easeOut }}
@@ -165,16 +86,9 @@ export default function Products() {
             Living biological systems packaged for precision deployment — each formulation tuned for
             a distinct layer of crop care and farm efficiency.
           </motion.p>
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.75, delay: 0.4, ease: easeOut }}
-            className="mt-8 inline-flex w-fit animate-bounce items-center gap-2 rounded-full border border-cyan-400/30 bg-black/70 px-5 py-2.5 font-display text-[10px] uppercase tracking-[0.25em] text-cyan-400 backdrop-blur-md"
-          >
-            Scroll to complete animation flow ↓
-          </motion.div>
         </header>
 
-        <div ref={cardsRef} className="grid gap-8 pt-12 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           {productList.map((product, i) => {
             const detailTo = `/products/${product.id}`
             const baseDelay = 0.08 + i * 0.08

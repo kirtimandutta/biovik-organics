@@ -263,12 +263,15 @@ export default function ScrollyStory() {
           className="flex h-svh w-full items-center justify-center px-5 md:px-10 lg:px-14"
           style={panelStyle(3)}
         >
-          <div className="pointer-events-auto mx-auto w-full max-w-[1400px] text-center">
+          <div className="pointer-events-auto mx-auto flex w-full max-w-[1400px] flex-col items-center text-center">
+            <h2 className="font-display text-3xl font-bold uppercase leading-[1.05] tracking-[0.06em] text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              Request for a free field trial
+            </h2>
             <Link
               to="/contact"
-              className="inline-block font-display text-3xl font-bold uppercase leading-[1.05] tracking-[0.06em] text-white transition-colors duration-300 hover:text-emerald-400 sm:text-4xl md:text-5xl lg:text-6xl"
+              className="mt-10 inline-flex items-center justify-center border border-white px-8 py-3.5 font-display text-sm font-semibold tracking-[0.28em] text-white transition-all duration-300 hover:bg-white hover:text-black md:mt-12 md:px-10 md:py-4 md:text-base"
             >
-              Request for a free field trial
+              GET STARTED
             </Link>
           </div>
         </section>
