@@ -21,10 +21,10 @@ function ProductMedia({ src, fallback, name }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, ease: easeOut }}
-        className="flex flex-col items-center gap-3 text-zinc-600"
+        className="flex flex-col items-center gap-3 text-white"
       >
         <Box size={36} strokeWidth={1.25} className="text-cyan-400/40" />
-        <span className="font-display text-[10px] tracking-[0.28em]">{name.toUpperCase()}</span>
+        <span className="font-display text-[16px] tracking-[0.28em]">{name.toUpperCase()}</span>
       </motion.div>
     )
   }
@@ -81,9 +81,9 @@ export default function Products() {
           <motion.p
             {...fadeUp}
             transition={{ duration: 0.8, delay: 0.28, ease: easeOut }}
-            className="mt-4 max-w-2xl rounded-xl border border-white/10 bg-black/30 p-4 font-body text-base leading-relaxed text-zinc-300 backdrop-blur-md"
+            className="mt-4 max-w-2xl rounded-xl border border-white/10 bg-black/30 p-4 font-body text-base leading-relaxed text-white backdrop-blur-md"
           >
-            Living biological systems packaged for precision deployment — each formulation tuned for
+            Living biological systems packaged for precision deployment â€” each formulation tuned for
             a distinct layer of crop care and farm efficiency.
           </motion.p>
         </header>
@@ -154,7 +154,7 @@ export default function Products() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: baseDelay + 0.24, ease: easeOut }}
-                  className="mb-6 flex-1 text-sm leading-relaxed text-zinc-300"
+                  className="mb-6 flex-1 text-sm leading-relaxed text-white"
                 >
                   {product.description}
                 </motion.p>
@@ -189,7 +189,7 @@ export default function Products() {
                   {product.contactCta && (
                     <Link
                       to={product.contactCta.to}
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-xs uppercase tracking-widest text-zinc-300 transition-all hover:border-cyan-400/40 hover:text-cyan-400"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-xs uppercase tracking-widest text-white transition-all hover:border-cyan-400/40 hover:text-cyan-400"
                     >
                       <FileUp size={14} strokeWidth={1.75} />
                       {product.contactCta.label}

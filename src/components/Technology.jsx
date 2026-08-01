@@ -76,12 +76,12 @@ export default function Technology() {
                 } ${isActive ? 'bg-black/55' : 'bg-black/25 hover:bg-black/40'}`}
               >
                 <div className="mb-8 flex items-center justify-between">
-                  <span className="font-display text-sm font-semibold tracking-[0.3em] text-zinc-400">
+                  <span className="font-display text-sm font-semibold tracking-[0.3em] text-white">
                     {phase.subtitle}
                   </span>
                   <span
                     className={`font-display text-3xl font-bold tracking-widest transition-colors duration-300 ${
-                      isActive ? 'text-emerald-400' : 'text-zinc-500'
+                      isActive ? 'text-emerald-400' : 'text-white'
                     }`}
                   >
                     {phase.id}
@@ -92,7 +92,7 @@ export default function Technology() {
                   size={28}
                   strokeWidth={1.25}
                   className={`mb-6 transition-colors duration-300 ${
-                    isActive ? 'text-emerald-400' : 'text-zinc-500'
+                    isActive ? 'text-emerald-400' : 'text-white'
                   }`}
                 />
 
@@ -108,7 +108,7 @@ export default function Technology() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.35 }}
-                      className="mt-auto font-body text-sm font-light leading-relaxed text-zinc-300 lg:text-base"
+                      className="mt-auto font-body text-sm font-light leading-relaxed text-white lg:text-base"
                     >
                       {phase.body}
                     </motion.p>
@@ -139,7 +139,7 @@ export default function Technology() {
                 className={`border-white/15 p-6 ${i < PHASES.length - 1 ? 'border-b' : ''}`}
               >
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="font-display text-xs font-semibold tracking-[0.3em] text-zinc-400">
+                  <span className="font-display text-xs font-semibold tracking-[0.3em] text-white">
                     {phase.subtitle}
                   </span>
                   <span className="font-display text-2xl font-bold tracking-widest text-emerald-400">
@@ -150,7 +150,7 @@ export default function Technology() {
                 <h3 className="mb-3 font-display text-xl font-bold tracking-[0.18em] text-white">
                   {phase.title}
                 </h3>
-                <p className="font-body text-sm font-light leading-relaxed text-zinc-300">
+                <p className="font-body text-sm font-light leading-relaxed text-white">
                   {phase.body}
                 </p>
               </motion.div>
@@ -166,8 +166,8 @@ export default function Technology() {
           className="mt-8 hidden items-center gap-4 border border-white/15 bg-black/40 px-6 py-4 md:flex"
         >
           <ActiveIcon size={18} strokeWidth={1.5} className="text-emerald-400" />
-          <p className="font-display text-xs font-semibold tracking-[0.25em] text-zinc-300">
-            ACTIVE PROTOCOL — {PHASES[active].subtitle.toUpperCase()}: {PHASES[active].title}
+          <p className="font-display text-xs font-semibold tracking-[0.25em] text-white">
+            ACTIVE PROTOCOL â€” {PHASES[active].subtitle.toUpperCase()}: {PHASES[active].title}
           </p>
         </motion.div>
       </div>

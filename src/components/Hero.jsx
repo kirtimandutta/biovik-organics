@@ -56,7 +56,7 @@ export default function Hero() {
         type="button"
         aria-label="Scroll to mission"
         onClick={scrollToMission}
-        className="scroll-indicator absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white/70 transition-colors hover:text-emerald-400"
+        className="scroll-indicator absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white transition-colors hover:text-emerald-400"
       >
         <ChevronDown size={28} strokeWidth={1.25} />
       </button>

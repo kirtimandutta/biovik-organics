@@ -118,7 +118,7 @@ export default function ScrollyStory() {
 
   return (
     <div ref={containerRef} className="scrolly-story relative">
-      {/* Sticky video backdrop — one clip per section */}
+      {/* Sticky video backdrop â€” one clip per section */}
       <div className="scrolly-sticky sticky top-0 z-0 h-svh w-screen overflow-hidden">
         <video
           ref={heroVideoRef}
@@ -163,7 +163,7 @@ export default function ScrollyStory() {
 
       {/* Four equal vertical sections stacked over the sticky video */}
       <div className="pointer-events-none relative z-10 -mt-[100svh]">
-        {/* Section 1 — Hero */}
+        {/* Section 1 â€” Hero */}
         <section
           id="hero"
           className="relative flex h-svh w-full items-end justify-start px-5 pb-28 pt-32 md:px-10 md:pb-32 lg:px-14"
@@ -191,7 +191,7 @@ export default function ScrollyStory() {
               className="mt-10"
             >
               <Link
-                to="/process"
+                to="/about"
                 className="inline-block border border-white px-8 py-3 font-display text-sm font-semibold tracking-[0.28em] text-white transition-all duration-300 hover:bg-white hover:text-black"
               >
                 LEARN MORE
@@ -202,13 +202,13 @@ export default function ScrollyStory() {
             type="button"
             aria-label="Scroll to mission"
             onClick={scrollToMission}
-            className="scroll-indicator pointer-events-auto absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white/70 transition-colors hover:text-emerald-400"
+            className="scroll-indicator pointer-events-auto absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white transition-colors hover:text-emerald-400"
           >
             <ChevronDown size={28} strokeWidth={1.25} />
           </button>
         </section>
 
-        {/* Section 2 — Mission */}
+        {/* Section 2 â€” Mission */}
         <section
           id="mission"
           className="flex h-svh w-full items-center justify-center px-5 md:px-10 lg:px-14"
@@ -218,13 +218,13 @@ export default function ScrollyStory() {
             <h2 className="max-w-4xl font-display text-4xl font-bold uppercase leading-[0.95] tracking-[0.06em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Food Built Civilisations
             </h2>
-            <p className="mt-6 max-w-3xl font-body text-base font-light leading-relaxed text-zinc-200 md:mt-8 md:text-lg lg:text-xl">
+            <p className="mt-6 max-w-3xl font-body text-base font-light leading-relaxed text-white md:mt-8 md:text-lg lg:text-xl">
               It should never be broken by war, geopolitics, or climate chaos.
             </p>
           </div>
         </section>
 
-        {/* Section 3 — Technology */}
+        {/* Section 3 â€” Technology */}
         <section
           id="technology"
           className="flex h-svh w-full items-center justify-center px-5 md:px-10 lg:px-14"
@@ -250,7 +250,7 @@ export default function ScrollyStory() {
           </div>
         </section>
 
-        {/* Section 4 — CTA */}
+        {/* Section 4 â€” CTA */}
         <section
           id="field-trial"
           className="flex h-svh w-full items-center justify-center px-5 md:px-10 lg:px-14"

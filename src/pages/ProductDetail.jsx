@@ -10,9 +10,9 @@ function ProductMedia({ src, fallback, name }) {
 
   if (failed) {
     return (
-      <div className="flex flex-col items-center gap-3 text-zinc-600">
+      <div className="flex flex-col items-center gap-3 text-white">
         <Box size={48} strokeWidth={1.25} className="text-cyan-400/40" />
-        <span className="font-display text-[10px] tracking-[0.28em]">{name.toUpperCase()}</span>
+        <span className="font-display text-[16px] tracking-[0.28em]">{name.toUpperCase()}</span>
       </div>
     )
   }
@@ -134,7 +134,7 @@ export default function ProductDetail() {
       <div className="relative mx-auto max-w-7xl px-6 pb-28 pt-28 md:px-12 md:pt-32">
         <Link
           to="/products"
-          className="mb-10 inline-flex items-center gap-2 font-display text-xs tracking-[0.22em] text-zinc-400 transition-colors hover:text-cyan-400"
+          className="mb-10 inline-flex items-center gap-2 font-display text-xs tracking-[0.22em] text-white transition-colors hover:text-cyan-400"
         >
           <ArrowLeft size={14} strokeWidth={1.75} />
           ALL FORMULATIONS
@@ -157,7 +157,7 @@ export default function ProductDetail() {
             <p className="mt-3 font-display text-sm tracking-[0.18em] text-emerald-400">
               {product.tagline}
             </p>
-            <p className="mt-6 max-w-xl font-body text-base font-light leading-relaxed text-zinc-300">
+            <p className="mt-6 max-w-xl font-body text-base font-light leading-relaxed text-white">
               {product.description}
             </p>
 
@@ -165,7 +165,7 @@ export default function ProductDetail() {
               {product.specs.map((spec) => (
                 <span
                   key={spec}
-                  className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-display text-[10px] uppercase tracking-widest text-cyan-300"
+                  className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-display text-[16px] uppercase tracking-widest text-cyan-300"
                 >
                   {spec}
                 </span>
@@ -202,13 +202,13 @@ export default function ProductDetail() {
           transition={{ duration: 0.6 }}
           className="mb-14 rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur-xl md:p-10"
         >
-          <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-emerald-400">
+          <p className="mb-2 font-mono text-[16px] uppercase tracking-[0.3em] text-emerald-400">
             MECHANISM OF ACTION & SCIENCE
           </p>
           <h2 className="mb-4 font-display text-2xl font-light tracking-tight md:text-3xl">
             How {product.name} Works
           </h2>
-          <p className="mb-10 max-w-3xl font-body text-sm font-light leading-relaxed text-zinc-400 md:text-base">
+          <p className="mb-10 max-w-3xl font-body text-sm font-light leading-relaxed text-white md:text-base">
             {product.details}
           </p>
 
@@ -218,13 +218,13 @@ export default function ProductDetail() {
                 key={item.title}
                 className="border border-white/10 bg-black/30 p-5 transition-colors hover:border-cyan-400/30"
               >
-                <span className="mb-3 block font-display text-2xl font-bold tracking-widest text-white/15">
+                <span className="mb-3 block font-display text-2xl font-bold tracking-widest text-white">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="mb-2 font-display text-sm font-bold tracking-[0.16em] text-white">
                   {item.title}
                 </h3>
-                <p className="font-body text-sm font-light leading-relaxed text-zinc-400">
+                <p className="font-body text-sm font-light leading-relaxed text-white">
                   {item.body}
                 </p>
               </div>
@@ -238,7 +238,7 @@ export default function ProductDetail() {
                 className="flex items-start gap-3 border border-white/10 bg-white/[0.03] px-4 py-3"
               >
                 <Check size={16} className="mt-0.5 shrink-0 text-emerald-400" strokeWidth={2} />
-                <span className="font-display text-xs tracking-[0.14em] text-zinc-300">
+                <span className="font-display text-xs tracking-[0.14em] text-white">
                   {feature}
                 </span>
               </li>
@@ -266,10 +266,10 @@ export default function ProductDetail() {
               <span className="mb-4 flex h-10 w-10 items-center justify-center border border-cyan-400/30 text-cyan-400">
                 <Icon size={18} strokeWidth={1.5} />
               </span>
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.28em] text-zinc-500">
+              <p className="mb-2 font-mono text-[16px] uppercase tracking-[0.28em] text-white">
                 {label}
               </p>
-              <p className="font-body text-sm leading-relaxed text-zinc-200">{value}</p>
+              <p className="font-body text-sm leading-relaxed text-white">{value}</p>
             </div>
           ))}
         </motion.section>
@@ -282,13 +282,13 @@ export default function ProductDetail() {
           className="mb-16 flex flex-col items-start justify-between gap-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-6 backdrop-blur-xl md:flex-row md:items-center md:p-8"
         >
           <div>
-            <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.28em] text-cyan-400">
+            <p className="mb-2 font-mono text-[16px] uppercase tracking-[0.28em] text-cyan-400">
               INQUIRY & ORDER
             </p>
             <h2 className="font-display text-xl font-light tracking-tight md:text-2xl">
               Partner on a {product.name} deployment
             </h2>
-            <p className="mt-2 max-w-xl font-body text-sm font-light text-zinc-400">
+            <p className="mt-2 max-w-xl font-body text-sm font-light text-white">
               Request a custom batch, field trial allocation, or formulation consult with Biovik Labs.
             </p>
           </div>
@@ -302,7 +302,7 @@ export default function ProductDetail() {
 
         {/* Other products */}
         <div>
-          <p className="mb-5 font-display text-xs tracking-[0.28em] text-zinc-500">
+          <p className="mb-5 font-display text-xs tracking-[0.28em] text-white">
             OTHER FORMULATIONS
           </p>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -312,14 +312,14 @@ export default function ProductDetail() {
                 to={`/products/${p.id}`}
                 className="rounded-2xl border border-white/10 bg-black/40 p-5 backdrop-blur-md transition-all hover:border-cyan-400/40 hover:shadow-[0_0_24px_rgba(0,242,254,0.1)]"
               >
-                <p className="mb-1 font-mono text-[10px] tracking-widest text-cyan-400">
+                <p className="mb-1 font-mono text-[16px] tracking-widest text-cyan-400">
                   {p.category}
                 </p>
                 <p className="font-display text-lg font-bold tracking-[0.08em] text-white">
                   {p.name}
                 </p>
-                <p className="mt-3 font-display text-[10px] tracking-[0.22em] text-zinc-500 transition-colors group-hover:text-cyan-400">
-                  KNOW MORE →
+                <p className="mt-3 font-display text-[16px] tracking-[0.22em] text-white transition-colors group-hover:text-cyan-400">
+                  KNOW MORE â†’
                 </p>
               </Link>
             ))}

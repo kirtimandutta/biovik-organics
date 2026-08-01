@@ -73,7 +73,7 @@ export default function Rnd() {
           <h1 className="font-display text-4xl font-bold uppercase leading-[0.95] tracking-[0.2em] text-white sm:text-5xl md:text-6xl">
             Research & Synthetics
           </h1>
-          <p className="mt-6 max-w-2xl font-body text-base font-light leading-relaxed text-zinc-400 md:text-lg">
+          <p className="mt-6 max-w-2xl font-body text-base font-light leading-relaxed text-white md:text-lg">
             Advancing deep-science biotechnology and AI-driven formulation pipelines from our
             primary research facility in Bangalore.
           </p>
@@ -91,7 +91,7 @@ export default function Rnd() {
               key={m.label}
               className="bg-[#08080a]/90 px-5 py-8 backdrop-blur-md md:px-7 md:py-10"
             >
-              <p className="mb-3 font-display text-[10px] tracking-[0.28em] text-zinc-500">
+              <p className="mb-3 font-display text-[16px] tracking-[0.28em] text-white">
                 {m.label}
               </p>
               <p
@@ -107,7 +107,7 @@ export default function Rnd() {
           ))}
         </motion.div>
 
-        {/* Section 1 — Biovik Labs */}
+        {/* Section 1 â€” Biovik Labs */}
         <motion.section
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -117,13 +117,13 @@ export default function Rnd() {
         >
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
             <div>
-              <p className="mb-3 font-display text-[10px] font-semibold tracking-[0.3em] text-cyan-400">
+              <p className="mb-3 font-display text-[16px] font-semibold tracking-[0.3em] text-cyan-400">
                 FACILITY & PIPELINE
               </p>
               <h2 className="mb-5 font-display text-3xl font-light uppercase tracking-tight text-white md:text-4xl">
                 Biovik Labs
               </h2>
-              <p className="mb-8 font-body text-sm font-light leading-relaxed text-zinc-400 md:text-base">
+              <p className="mb-8 font-body text-sm font-light leading-relaxed text-white md:text-base">
                 Biovik operates from a state-of-the-art research and development facility in
                 Bangalore, where our team is focused on advancing biotechnology through innovative
                 and practical research. We are building economical, safe, and functional solutions
@@ -134,7 +134,7 @@ export default function Rnd() {
                 {LAB_TAGS.map((tag) => (
                   <span
                     key={tag}
-                    className="cursor-default border border-white/10 bg-black/40 px-3 py-2 font-display text-[10px] tracking-[0.2em] text-zinc-400 transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-400/5 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,254,0.12)]"
+                    className="cursor-default border border-white/10 bg-black/40 px-3 py-2 font-display text-[16px] tracking-[0.2em] text-white transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-400/5 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,254,0.12)]"
                   >
                     [ {tag} ]
                   </span>
@@ -151,7 +151,7 @@ export default function Rnd() {
           </div>
         </motion.section>
 
-        {/* Section 2 — Bhramha */}
+        {/* Section 2 â€” Bhramha */}
         <motion.section
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -170,13 +170,13 @@ export default function Rnd() {
             </div>
 
             <div className="order-1 md:order-2">
-              <p className="mb-3 font-display text-[10px] font-semibold tracking-[0.3em] text-emerald-400">
+              <p className="mb-3 font-display text-[16px] font-semibold tracking-[0.3em] text-emerald-400">
                 DEEP-SCIENCE AI PLATFORM
               </p>
               <h2 className="mb-5 font-display text-3xl font-light uppercase tracking-tight text-white md:text-4xl">
                 Bhramha
               </h2>
-              <p className="mb-8 font-body text-sm font-light leading-relaxed text-zinc-400 md:text-base">
+              <p className="mb-8 font-body text-sm font-light leading-relaxed text-white md:text-base">
                 At Biovik, we are advancing R&D with Bhramha, a deep-science AI platform developed by
                 Biovik Labs. Designed to assist our scientists, it performs advanced calculations,
                 supports formulation development, and helps us build solutions aligned with client
@@ -192,7 +192,7 @@ export default function Rnd() {
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center border border-emerald-500/40 text-emerald-400 transition-colors group-hover:border-cyan-400/50 group-hover:text-cyan-400">
                       <Check size={14} strokeWidth={2.5} />
                     </span>
-                    <span className="font-display text-xs tracking-[0.16em] text-zinc-300 transition-colors group-hover:text-white md:text-sm">
+                    <span className="font-display text-xs tracking-[0.16em] text-white transition-colors group-hover:text-white md:text-sm">
                       {feature}
                     </span>
                   </li>

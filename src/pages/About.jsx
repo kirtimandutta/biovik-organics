@@ -17,7 +17,7 @@ export default function About() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(155deg,#2e1065_0%,#5b21b6_42%,#7c3aed_72%,#4c1d95_100%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(192,132,252,0.35),_transparent_55%)]" />
 
-      <div className="relative mx-auto max-w-[1400px] px-5 pb-24 pt-28 md:px-10 md:pb-32 md:pt-36 lg:px-14">
+      <div className="relative mx-auto max-w-[1400px] px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-36 lg:px-14">
         <motion.header
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export default function About() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: easeOut }}
-            className="font-body text-base font-light leading-relaxed text-zinc-200 md:text-lg"
+            className="font-body text-base font-light leading-relaxed text-white md:text-lg"
           >
             Biovik Organics Private Limited is a deep-science, R&amp;D-focused company on a mission
             to democratise food security for governments, farmers, and nations. We use advanced
@@ -49,7 +49,7 @@ export default function About() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.18, ease: easeOut }}
-            className="font-body text-base font-light leading-relaxed text-zinc-200 md:text-lg"
+            className="font-body text-base font-light leading-relaxed text-white md:text-lg"
           >
             Founded in 2025 on the belief that food is the fundamental building block of
             civilisation, we began as a research laboratory dedicated to solving one problem: how
@@ -62,7 +62,7 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.26, ease: easeOut }}
           >
-            <p className="mb-6 font-body text-base font-light leading-relaxed text-zinc-200 md:text-lg">
+            <p className="mb-6 font-body text-base font-light leading-relaxed text-white md:text-lg">
               Today, Biovik offers four core product categories:
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -90,7 +90,7 @@ export default function About() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45, ease: easeOut }}
-            className="font-body text-base font-light leading-relaxed text-zinc-200 md:text-lg"
+            className="font-body text-base font-light leading-relaxed text-white md:text-lg"
           >
             Our purpose is to make food security accessible to all, so that wars, geopolitical
             tensions, and climate shocks cannot undermine the basic foundation of modern society. We
@@ -109,6 +109,31 @@ export default function About() {
           </motion.p>
         </div>
       </div>
+
+      <motion.footer
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.9, ease: easeOut }}
+        className="relative mt-6 w-full px-5 pb-16 md:mt-10 md:px-10 md:pb-24 lg:px-14"
+      >
+        <div className="relative mx-auto w-full max-w-[1400px] md:w-[60%] md:max-w-[840px]">
+          <div className="overflow-hidden border border-white/15 bg-black/40">
+            <div className="relative aspect-video w-full overflow-hidden">
+              <video
+                className="h-full w-full object-contain"
+                src="/videos/about-footer.mp4?v=4"
+                autoPlay
+                loop
+                playsInline
+                controls
+                preload="metadata"
+                aria-label="Biovik Organics about footer"
+              />
+            </div>
+          </div>
+        </div>
+      </motion.footer>
     </div>
   )
 }

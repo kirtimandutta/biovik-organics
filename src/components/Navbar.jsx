@@ -5,16 +5,16 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { productList } from '../data/productsData'
 
 const NAV_LINKS = [
+  { label: 'ABOUT US', to: '/about' },
   { label: 'PROCESS', to: '/process' },
   { label: 'PRODUCTS', to: '/products', dropdown: true },
   { label: 'R&D', to: '/rnd' },
-  { label: 'ABOUT US', to: '/about' },
   { label: 'CONTACT', to: '/contact' },
 ]
 
 const linkClass = ({ isActive }) =>
   `font-display text-sm font-semibold tracking-[0.22em] transition-colors ${
-    isActive ? 'text-cyan-400' : 'text-white/90 hover:text-cyan-400'
+    isActive ? 'text-cyan-400' : 'text-white hover:text-cyan-400'
   }`
 
 export default function Navbar() {
@@ -91,7 +91,7 @@ export default function Navbar() {
                 >
                   <div
                     className={`inline-flex items-center gap-1.5 font-display text-sm font-semibold tracking-[0.22em] transition-colors ${
-                      productsActive ? 'text-cyan-400' : 'text-white/90'
+                      productsActive ? 'text-cyan-400' : 'text-white'
                     }`}
                   >
                     <Link to="/products" className="hover:text-cyan-400">
@@ -127,7 +127,7 @@ export default function Navbar() {
                           className={`mb-1 block rounded-lg px-3 py-2.5 font-display text-xs tracking-[0.2em] transition-colors ${
                             location.pathname === '/products'
                               ? 'bg-cyan-400/10 text-cyan-400'
-                              : 'text-zinc-300 hover:bg-white/5 hover:text-cyan-400'
+                              : 'text-white hover:bg-white/5 hover:text-cyan-400'
                           }`}
                         >
                           ALL FORMULATIONS
@@ -143,13 +143,13 @@ export default function Navbar() {
                               className={`block rounded-lg px-3 py-2.5 transition-colors ${
                                 active
                                   ? 'bg-cyan-400/10 text-cyan-400'
-                                  : 'text-zinc-300 hover:bg-white/5 hover:text-cyan-400'
+                                  : 'text-white hover:bg-white/5 hover:text-cyan-400'
                               }`}
                             >
                               <span className="block font-display text-xs tracking-[0.16em]">
                                 {product.name}
                               </span>
-                              <span className="mt-0.5 block font-mono text-[9px] tracking-widest text-zinc-500">
+                              <span className="mt-0.5 block font-mono text-[9px] tracking-widest text-white">
                                 {product.category}
                               </span>
                             </Link>
@@ -214,7 +214,7 @@ export default function Navbar() {
                         type="button"
                         aria-label="Toggle products list"
                         onClick={() => setMobileProductsOpen((v) => !v)}
-                        className="text-white/70 hover:text-cyan-400"
+                        className="text-white hover:text-cyan-400"
                       >
                         <ChevronDown
                           size={22}
@@ -235,7 +235,7 @@ export default function Navbar() {
                               key={product.id}
                               to={`/products/${product.id}`}
                               onClick={() => setOpen(false)}
-                              className="block py-3 pl-2 font-display text-lg tracking-[0.16em] text-zinc-300 transition-colors hover:text-cyan-400"
+                              className="block py-3 pl-2 font-display text-lg tracking-[0.16em] text-white transition-colors hover:text-cyan-400"
                             >
                               {product.name}
                             </Link>

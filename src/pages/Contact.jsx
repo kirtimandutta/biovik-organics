@@ -12,7 +12,7 @@ const INQUIRY_TYPES = [
 ]
 
 const inputClass =
-  'w-full border border-white/10 bg-white/[0.04] px-4 py-3.5 font-body text-sm text-white outline-none backdrop-blur-md transition-all placeholder:text-zinc-600 focus:border-cyan-400/50 focus:bg-white/[0.06] focus:shadow-[0_0_24px_rgba(0,242,254,0.08)]'
+  'w-full border border-white/10 bg-white/[0.04] px-4 py-3.5 font-body text-sm text-white outline-none backdrop-blur-md transition-all placeholder:text-white focus:border-cyan-400/50 focus:bg-white/[0.06] focus:shadow-[0_0_24px_rgba(0,242,254,0.08)]'
 
 export default function Contact() {
   const [searchParams] = useSearchParams()
@@ -70,12 +70,12 @@ export default function Contact() {
           <h1 className="font-display text-4xl font-bold uppercase leading-[0.95] tracking-[0.2em] text-white sm:text-5xl md:text-6xl">
             Partner With Biovik
           </h1>
-          <p className="mt-6 font-body text-base font-light leading-relaxed text-zinc-400 md:text-lg">
+          <p className="mt-6 font-body text-base font-light leading-relaxed text-white md:text-lg">
             Tell us about your crop systems, research goals, or distribution networks. Our team
             responds with a calibrated next step.
           </p>
           <div className="mt-10 space-y-3 border-t border-white/10 pt-8">
-            <p className="font-display text-[10px] tracking-[0.28em] text-zinc-500">DIRECT</p>
+            <p className="font-display text-[16px] tracking-[0.28em] text-white">DIRECT</p>
             <a
               href="mailto:harshchandak97@gmail.com"
               className="block font-display text-sm tracking-[0.12em] text-cyan-400 transition-colors hover:text-white"
@@ -96,7 +96,7 @@ export default function Contact() {
               <p className="mb-3 font-display text-xs tracking-[0.3em] text-emerald-400">
                 TRANSMISSION RECEIVED
               </p>
-              <p className="max-w-sm font-body text-sm font-light text-zinc-400">
+              <p className="max-w-sm font-body text-sm font-light text-white">
                 Thank you. A Biovik specialist will follow up shortly.
               </p>
               <button
@@ -112,7 +112,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="mb-2 block font-display text-[10px] tracking-[0.28em] text-zinc-500"
+                  className="mb-2 block font-display text-[16px] tracking-[0.28em] text-white"
                 >
                   NAME
                 </label>
@@ -131,7 +131,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block font-display text-[10px] tracking-[0.28em] text-zinc-500"
+                  className="mb-2 block font-display text-[16px] tracking-[0.28em] text-white"
                 >
                   WORK EMAIL
                 </label>
@@ -150,7 +150,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="inquiry"
-                  className="mb-2 block font-display text-[10px] tracking-[0.28em] text-zinc-500"
+                  className="mb-2 block font-display text-[16px] tracking-[0.28em] text-white"
                 >
                   INQUIRY TYPE
                 </label>
@@ -172,7 +172,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="mb-2 block font-display text-[10px] tracking-[0.28em] text-zinc-500"
+                  className="mb-2 block font-display text-[16px] tracking-[0.28em] text-white"
                 >
                   MESSAGE
                 </label>
@@ -183,7 +183,7 @@ export default function Contact() {
                   rows={5}
                   value={form.message}
                   onChange={onChange}
-                  placeholder="Describe your inquiry…"
+                  placeholder="Describe your inquiryâ€¦"
                   className={`${inputClass} resize-y`}
                 />
               </div>

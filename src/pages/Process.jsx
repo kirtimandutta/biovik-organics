@@ -57,9 +57,9 @@ function mlToLitersLabel(ml) {
 }
 
 function formatDoseRange(minMl, maxMl) {
-  const primary = `${minMl.toLocaleString()} mL – ${maxMl.toLocaleString()} mL`
+  const primary = `${minMl.toLocaleString()} mL â€“ ${maxMl.toLocaleString()} mL`
   if (maxMl >= 1000) {
-    return `${primary} (${mlToLitersLabel(minMl)} – ${mlToLitersLabel(maxMl)})`
+    return `${primary} (${mlToLitersLabel(minMl)} â€“ ${mlToLitersLabel(maxMl)})`
   }
   return primary
 }
@@ -85,8 +85,8 @@ function StageImage({ src, title, active }) {
       ) : (
         <div className="flex flex-col items-center gap-2 px-4 text-center">
           <div className="h-16 w-16 rounded-full border border-dashed border-cyan-400/30" />
-          <span className="font-display text-[10px] tracking-[0.28em] text-zinc-600">
-            {title.slice(0, 18)}…
+          <span className="font-display text-[16px] tracking-[0.28em] text-white">
+            {title.slice(0, 18)}â€¦
           </span>
         </div>
       )}
@@ -112,16 +112,16 @@ function DoseCalculator() {
           <Beaker size={18} strokeWidth={1.5} />
         </span>
         <div>
-          <p className="font-display text-[10px] tracking-[0.28em] text-zinc-500">CALCULATOR</p>
+          <p className="font-display text-[16px] tracking-[0.28em] text-white">CALCULATOR</p>
           <p className="font-display text-sm font-semibold tracking-[0.18em] text-white">
-            WATER VOLUME → DOSAGE
+            WATER VOLUME â†’ DOSAGE
           </p>
         </div>
       </div>
 
       <label
         htmlFor="water-volume"
-        className="mb-3 block font-display text-[10px] tracking-[0.28em] text-zinc-500"
+        className="mb-3 block font-display text-[16px] tracking-[0.28em] text-white"
       >
         WATER VOLUME (L)
       </label>
@@ -148,13 +148,13 @@ function DoseCalculator() {
       </div>
 
       <div className="border border-cyan-400/20 bg-cyan-400/5 px-5 py-5">
-        <p className="mb-2 font-display text-[10px] tracking-[0.28em] text-emerald-400">
+        <p className="mb-2 font-display text-[16px] tracking-[0.28em] text-emerald-400">
           RECOMMENDED DOSAGE
         </p>
         <p className="font-display text-lg font-bold tracking-[0.06em] text-white md:text-xl">
           {formatDoseRange(dose.minMl, dose.maxMl)}
         </p>
-        <p className="mt-2 font-body text-sm font-light text-zinc-400">
+        <p className="mt-2 font-body text-sm font-light text-white">
           Biovik Formula for {dose.v || 0}L water
         </p>
       </div>
@@ -185,7 +185,7 @@ export default function Process() {
           <h1 className="font-display text-4xl font-bold uppercase leading-[0.95] tracking-[0.2em] text-white sm:text-5xl md:text-6xl">
             The Biological Engine
           </h1>
-          <p className="mt-6 max-w-2xl font-body text-base font-light leading-relaxed text-zinc-400 md:text-lg">
+          <p className="mt-6 max-w-2xl font-body text-base font-light leading-relaxed text-white md:text-lg">
             A 5-stage precision synthesis pipeline transforming lab-grade microbial cultures into
             high-efficiency field bio-catalysts.
           </p>
@@ -237,8 +237,8 @@ export default function Process() {
                 {i < STAGES.length - 1 && <span className="h-px w-2 bg-white/10" />}
               </div>
               <span
-                className={`font-display text-[10px] tracking-[0.22em] transition-colors ${
-                  activeId === stage.id ? 'text-cyan-400' : 'text-zinc-600 group-hover:text-zinc-400'
+                className={`font-display text-[16px] tracking-[0.22em] transition-colors ${
+                  activeId === stage.id ? 'text-cyan-400' : 'text-white group-hover:text-white'
                 }`}
               >
                 {stage.id}
@@ -271,7 +271,7 @@ export default function Process() {
                 <div className="mb-3 flex items-center justify-between gap-2">
                   <span
                     className={`font-display text-2xl font-bold tracking-widest transition-colors ${
-                      isActive ? 'text-cyan-400' : 'text-white/20 group-hover:text-cyan-400/50'
+                      isActive ? 'text-cyan-400' : 'text-white group-hover:text-cyan-400/50'
                     }`}
                   >
                     {stage.id}
@@ -284,7 +284,7 @@ export default function Process() {
                 <h2 className="mb-3 font-display text-sm font-bold uppercase leading-snug tracking-[0.16em] text-white md:text-[13px]">
                   {stage.title}
                 </h2>
-                <p className="font-body text-xs font-light leading-relaxed text-zinc-400 md:text-sm">
+                <p className="font-body text-xs font-light leading-relaxed text-white md:text-sm">
                   {stage.description}
                 </p>
               </motion.button>
@@ -302,13 +302,13 @@ export default function Process() {
             transition={{ duration: 0.35 }}
             className="mt-6 border border-cyan-400/20 bg-white/5 p-6 backdrop-blur-md md:p-8"
           >
-            <p className="mb-2 font-display text-[10px] tracking-[0.3em] text-cyan-400">
-              STAGE {active.id} — TECHNICAL BREAKDOWN
+            <p className="mb-2 font-display text-[16px] tracking-[0.3em] text-cyan-400">
+              STAGE {active.id} â€” TECHNICAL BREAKDOWN
             </p>
             <h3 className="mb-4 font-display text-xl font-bold uppercase tracking-[0.2em] text-white">
               {active.title}
             </h3>
-            <p className="max-w-3xl font-body text-sm font-light leading-relaxed text-zinc-400 md:text-base">
+            <p className="max-w-3xl font-body text-sm font-light leading-relaxed text-white md:text-base">
               {active.detail}
             </p>
           </motion.div>
@@ -323,7 +323,7 @@ export default function Process() {
           className="mt-20 border border-white/10 bg-white/5 p-6 backdrop-blur-md md:mt-28 md:p-10 lg:p-12"
         >
           <div className="mb-10 max-w-2xl">
-            <p className="mb-3 font-display text-xs font-semibold tracking-[0.35em] text-emerald-400">
+            <p className="mb-3 font-display text-[16px] font-semibold tracking-[0.35em] text-emerald-400">
               HOW TO APPLY
             </p>
             <h2 className="font-display text-3xl font-bold uppercase tracking-[0.2em] text-white md:text-4xl">
@@ -338,11 +338,11 @@ export default function Process() {
                   <Droplets size={18} strokeWidth={1.5} />
                 </span>
                 <div>
-                  <p className="mb-1 font-display text-[10px] tracking-[0.28em] text-zinc-500">
+                  <p className="mb-1 font-display text-[16px] tracking-[0.28em] text-white">
                     STEP 01
                   </p>
-                  <p className="font-body text-sm font-light leading-relaxed text-zinc-300 md:text-base">
-                    Mix 5–10 mL of Biovik formulation per 1 Litre of water.
+                  <p className="font-body text-sm font-light leading-relaxed text-white md:text-base">
+                    Mix 5â€“10 mL of Biovik formulation per 1 Litre of water.
                   </p>
                 </div>
               </li>
@@ -351,10 +351,10 @@ export default function Process() {
                   <SprayCan size={18} strokeWidth={1.5} />
                 </span>
                 <div>
-                  <p className="mb-1 font-display text-[10px] tracking-[0.28em] text-zinc-500">
+                  <p className="mb-1 font-display text-[16px] tracking-[0.28em] text-white">
                     STEP 02
                   </p>
-                  <p className="font-body text-sm font-light leading-relaxed text-zinc-300 md:text-base">
+                  <p className="font-body text-sm font-light leading-relaxed text-white md:text-base">
                     Spray evenly over crops at guided, equal intervals for maximum absorption.
                   </p>
                 </div>

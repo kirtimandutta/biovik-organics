@@ -30,7 +30,7 @@ export default function Mission() {
         <motion.p
           {...fadeUp}
           transition={{ ...fadeUp.transition, delay: 0.1 }}
-          className="mt-6 max-w-3xl font-body text-base font-light leading-relaxed text-zinc-200 md:mt-8 md:text-lg lg:text-xl"
+          className="mt-6 max-w-3xl font-body text-base font-light leading-relaxed text-white md:mt-8 md:text-lg lg:text-xl"
         >
           It should never be broken by war, geopolitics, or climate chaos.
         </motion.p>
