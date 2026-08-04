@@ -120,15 +120,10 @@ export default function About() {
         <div className="relative mx-auto w-full max-w-[1400px] md:w-[60%] md:max-w-[840px]">
           <div className="overflow-hidden border border-white/15 bg-black/40">
             <div className="relative aspect-video w-full overflow-hidden">
-              <video
+              <img
+                src="/assets/about-footer.jpg"
+                alt="Biovik Organics — agriculture and food systems"
                 className="h-full w-full object-contain"
-                src="/videos/about-footer.mp4?v=4"
-                autoPlay
-                loop
-                playsInline
-                controls
-                preload="metadata"
-                aria-label="Biovik Organics about footer"
               />
             </div>
           </div>
