@@ -49,18 +49,10 @@ function ProductMedia({ src, fallback, name }) {
 
 export default function Products() {
   return (
-    <div className="relative min-h-svh overflow-hidden bg-[#08080a] pb-32 pt-28 text-white md:pt-32">
-      <div className="cellular-grid pointer-events-none absolute inset-0 opacity-35" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(0,242,254,0.07),_transparent_55%)]" />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: [
-            'radial-gradient(ellipse at center, transparent 18%, rgba(91,33,182,0.11) 55%, rgba(46,16,101,0.22) 78%, rgba(26,10,46,0.28) 100%)',
-            'linear-gradient(155deg, rgba(46,16,101,0.14) 0%, rgba(91,33,182,0.08) 42%, rgba(124,58,237,0.07) 72%, rgba(76,29,149,0.12) 100%)',
-          ].join(', '),
-        }}
-      />
+    <div className="relative min-h-svh overflow-hidden bg-[#1a0a2e] pb-32 pt-28 text-white md:pt-32">
+      <div className="cellular-grid pointer-events-none absolute inset-0 opacity-30" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(155deg,#2e1065_0%,#5b21b6_42%,#7c3aed_72%,#4c1d95_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(192,132,252,0.35),_transparent_55%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
         <header className="mb-14 max-w-3xl md:mb-16">
