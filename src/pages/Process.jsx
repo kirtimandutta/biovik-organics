@@ -57,9 +57,9 @@ function mlToLitersLabel(ml) {
 }
 
 function formatDoseRange(minMl, maxMl) {
-  const primary = `${minMl.toLocaleString()} mL â€“ ${maxMl.toLocaleString()} mL`
+  const primary = `${minMl.toLocaleString()} mL – ${maxMl.toLocaleString()} mL`
   if (maxMl >= 1000) {
-    return `${primary} (${mlToLitersLabel(minMl)} â€“ ${mlToLitersLabel(maxMl)})`
+    return `${primary} (${mlToLitersLabel(minMl)} – ${mlToLitersLabel(maxMl)})`
   }
   return primary
 }
@@ -86,7 +86,7 @@ function StageImage({ src, title, active }) {
         <div className="flex flex-col items-center gap-2 px-4 text-center">
           <div className="h-16 w-16 rounded-full border border-dashed border-cyan-400/30" />
           <span className="font-display text-[16px] tracking-[0.28em] text-white">
-            {title.slice(0, 18)}â€¦
+            {title.slice(0, 18)}…
           </span>
         </div>
       )}
@@ -114,7 +114,7 @@ function DoseCalculator() {
         <div>
           <p className="font-display text-[16px] tracking-[0.28em] text-white">CALCULATOR</p>
           <p className="font-display text-sm font-semibold tracking-[0.18em] text-white">
-            WATER VOLUME â†’ DOSAGE
+            WATER VOLUME → DOSAGE
           </p>
         </div>
       </div>
@@ -303,7 +303,7 @@ export default function Process() {
             className="mt-6 border border-cyan-400/20 bg-white/5 p-6 backdrop-blur-md md:p-8"
           >
             <p className="mb-2 font-display text-[16px] tracking-[0.3em] text-cyan-400">
-              STAGE {active.id} â€” TECHNICAL BREAKDOWN
+              STAGE {active.id} — TECHNICAL BREAKDOWN
             </p>
             <h3 className="mb-4 font-display text-xl font-bold uppercase tracking-[0.2em] text-white">
               {active.title}
@@ -318,17 +318,37 @@ export default function Process() {
         <motion.section
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mt-20 border border-white/10 bg-white/5 p-6 backdrop-blur-md md:mt-28 md:p-10 lg:p-12"
         >
-          <div className="mb-10 max-w-2xl">
+          <div className="mb-8 max-w-2xl md:mb-10">
             <p className="mb-3 font-display text-[16px] font-semibold tracking-[0.35em] text-emerald-400">
               HOW TO APPLY
             </p>
             <h2 className="font-display text-3xl font-bold uppercase tracking-[0.2em] text-white md:text-4xl">
               Dosing & Application Protocol
             </h2>
+          </div>
+
+          <div className="relative mx-auto mb-8 w-full max-w-5xl md:mb-10">
+            <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,_rgba(0,242,254,0.14),_transparent_65%)] blur-2xl" />
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_0_50px_rgba(0,242,254,0.15)] backdrop-blur-md transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_0_60px_rgba(0,242,254,0.22)] md:rounded-3xl">
+              <div className="aspect-video w-full">
+                <video
+                  className="h-full w-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls
+                  preload="metadata"
+                >
+                  <source src="/assets/videos/biovikwaterrequired.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
@@ -342,7 +362,7 @@ export default function Process() {
                     STEP 01
                   </p>
                   <p className="font-body text-sm font-light leading-relaxed text-white md:text-base">
-                    Mix 5â€“10 mL of Biovik formulation per 1 Litre of water.
+                    Mix 5–10 mL of Biovik formulation per 1 Litre of water.
                   </p>
                 </div>
               </li>
