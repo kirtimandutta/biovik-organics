@@ -198,8 +198,7 @@ export default function Process() {
           transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto my-12 w-full max-w-5xl"
         >
-          <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,_rgba(0,242,254,0.14),_transparent_65%)] blur-2xl" />
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_0_50px_rgba(0,242,254,0.15)] backdrop-blur-md transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_0_60px_rgba(0,242,254,0.22)] md:rounded-3xl">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_0_40px_rgba(0,0,0,0.45)] transition-all duration-500 hover:border-white/25 md:rounded-3xl">
             <div className="aspect-video w-full">
               <video
                 className="h-full w-full object-cover"
@@ -210,7 +209,7 @@ export default function Process() {
                 controls
                 preload="metadata"
               >
-                <source src="/assets/videos/biovik-process.mp4" type="video/mp4" />
+                <source src="/assets/videos/biovik-process.mp4?v=grade-shadows" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -332,8 +331,7 @@ export default function Process() {
           </div>
 
           <div className="relative mx-auto mb-8 w-full max-w-5xl md:mb-10">
-            <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,_rgba(0,242,254,0.14),_transparent_65%)] blur-2xl" />
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_0_50px_rgba(0,242,254,0.15)] backdrop-blur-md transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_0_60px_rgba(0,242,254,0.22)] md:rounded-3xl">
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_0_40px_rgba(0,0,0,0.45)] transition-all duration-500 hover:border-white/25 md:rounded-3xl">
               <div className="aspect-video w-full">
                 <video
                   className="h-full w-full object-cover"
@@ -344,7 +342,7 @@ export default function Process() {
                   controls
                   preload="metadata"
                 >
-                  <source src="/assets/videos/biovikwaterrequired.mp4" type="video/mp4" />
+                  <source src="/assets/videos/biovikwaterrequired.mp4?v=grade-shadows" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>

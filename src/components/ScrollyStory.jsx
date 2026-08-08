@@ -4,20 +4,76 @@ import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const SECTIONS = 4
+/** Catch-up toward scroll target — high enough to feel locked, soft enough to avoid jitter. */
+const SCRUB_SPEED = 14
+/** Share of each section used to crossfade into the next clip. */
+const CROSSFADE = 0.18
 
-function seekVideo(video, progress) {
-  if (!video?.duration || !Number.isFinite(video.duration)) return
-  const targetTime = Math.min(
-    video.duration,
-    Math.max(0, progress * video.duration),
-  )
-  if (Math.abs(video.currentTime - targetTime) > 0.02) {
+function frameDuration() {
+  return 1 / 30
+}
+
+function createSeekController(video) {
+  let busy = false
+  let pending = null
+  let safetyTimer = 0
+
+  const flush = () => {
+    if (pending == null || busy) return
+    const target = pending
+    pending = null
+    if (!video.duration || !Number.isFinite(video.duration)) return
+    if (Math.abs(video.currentTime - target) < frameDuration() * 0.45) return
+
+    busy = true
+    window.clearTimeout(safetyTimer)
+    safetyTimer = window.setTimeout(() => {
+      busy = false
+      flush()
+    }, 90)
+
     try {
-      video.currentTime = targetTime
+      if (typeof video.fastSeek === 'function') {
+        video.fastSeek(target)
+      } else {
+        video.currentTime = target
+      }
     } catch {
-      // ignore mid-seek race
+      window.clearTimeout(safetyTimer)
+      busy = false
     }
   }
+
+  const onSeeked = () => {
+    window.clearTimeout(safetyTimer)
+    busy = false
+    flush()
+  }
+
+  video.addEventListener('seeked', onSeeked)
+
+  return {
+    seek(progress) {
+      if (!video.duration || !Number.isFinite(video.duration)) return
+      const raw = Math.min(1, Math.max(0, progress)) * video.duration
+      const step = frameDuration()
+      const target = Math.min(
+        video.duration,
+        Math.max(0, Math.round(raw / step) * step),
+      )
+      pending = target
+      flush()
+    },
+    destroy() {
+      window.clearTimeout(safetyTimer)
+      video.removeEventListener('seeked', onSeeked)
+    },
+  }
+}
+
+function smoothstep(edge0, edge1, x) {
+  const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)))
+  return t * t * (3 - 2 * t)
 }
 
 export default function ScrollyStory() {
@@ -41,13 +97,19 @@ export default function ScrollyStory() {
     ]
     if (!container || videos.some((v) => !v)) return undefined
 
+    const seekers = videos.map((video) => createSeekController(video))
+
     videos.forEach((video) => {
       video.pause()
       video.loop = false
+      video.style.opacity = '0'
+      video.style.willChange = 'opacity'
     })
+    videos[0].style.opacity = '1'
 
     let running = true
     let lastTs = performance.now()
+    let primedNext = -1
 
     const readScrollProgress = () => {
       const rect = container.getBoundingClientRect()
@@ -64,14 +126,54 @@ export default function ScrollyStory() {
 
       targetProgress.current = readScrollProgress()
 
-      const ease = 1 - Math.exp(-dt * 9)
+      const ease = 1 - Math.exp(-dt * SCRUB_SPEED)
       smoothProgress.current +=
         (targetProgress.current - smoothProgress.current) * ease
 
+      if (
+        Math.abs(targetProgress.current - smoothProgress.current) < 0.00008
+      ) {
+        smoothProgress.current = targetProgress.current
+      }
+
       const p = smoothProgress.current
-      const panel = Math.min(SECTIONS - 1, Math.floor(p * SECTIONS))
-      const localProgress = Math.min(1, Math.max(0, p * SECTIONS - panel))
-      seekVideo(videos[panel], localProgress)
+      const scaled = p * SECTIONS
+      const panel = Math.min(SECTIONS - 1, Math.floor(scaled))
+      const localProgress = Math.min(1, Math.max(0, scaled - panel))
+      const fadeStart = 1 - CROSSFADE
+
+      // Scrub only the active clip — never seek two videos in the same frame.
+      seekers[panel].seek(localProgress)
+
+      // During crossfade, hold the next clip at its first frame (opacity only).
+      if (panel < SECTIONS - 1 && localProgress > fadeStart) {
+        if (primedNext !== panel + 1) {
+          seekers[panel + 1].seek(0)
+          primedNext = panel + 1
+        }
+      } else if (localProgress < 0.02) {
+        primedNext = -1
+      }
+
+      videos.forEach((video, i) => {
+        let opacity = 0
+
+        if (i === panel) {
+          if (panel < SECTIONS - 1 && localProgress > fadeStart) {
+            opacity = 1 - smoothstep(fadeStart, 1, localProgress)
+          } else {
+            opacity = 1
+          }
+        } else if (
+          i === panel + 1 &&
+          panel < SECTIONS - 1 &&
+          localProgress > fadeStart
+        ) {
+          opacity = smoothstep(fadeStart, 1, localProgress)
+        }
+
+        video.style.opacity = String(opacity)
+      })
 
       setActivePanel((prev) => (prev === panel ? prev : panel))
 
@@ -97,6 +199,7 @@ export default function ScrollyStory() {
 
     return () => {
       running = false
+      seekers.forEach((s) => s.destroy())
       videos.forEach((video) =>
         video.removeEventListener('loadedmetadata', onLoaded),
       )
@@ -113,48 +216,48 @@ export default function ScrollyStory() {
   const panelStyle = (index) => ({
     opacity: activePanel === index ? 1 : 0.22,
     transform: activePanel === index ? 'translateY(0)' : 'translateY(12px)',
-    transition: 'opacity 0.55s ease, transform 0.55s ease',
+    transition: 'opacity 0.7s ease, transform 0.7s ease',
   })
 
   return (
     <div ref={containerRef} className="scrolly-story relative">
-      {/* Sticky video backdrop â€” one clip per section */}
+      {/* Sticky video backdrop — one clip per section */}
       <div className="scrolly-sticky sticky top-0 z-0 h-svh w-screen overflow-hidden">
         <video
           ref={heroVideoRef}
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
-          style={{ opacity: activePanel === 0 ? 1 : 0 }}
-          src="/videos/hero-section.mp4?v=1440"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: 1 }}
+          src="/videos/hero-section.mp4?v=denoise-clarity"
           muted
           playsInline
           preload="auto"
         />
         <video
           ref={missionVideoRef}
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
-          style={{ opacity: activePanel === 1 ? 1 : 0 }}
-          src="/videos/mission-section.mp4?v=1440"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: 0 }}
+          src="/videos/mission-section.mp4?v=scrub-1080"
           muted
           playsInline
           preload="auto"
         />
         <video
           ref={techVideoRef}
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
-          style={{ opacity: activePanel === 2 ? 1 : 0 }}
-          src="/videos/tech-section.mp4?v=1440"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: 0 }}
+          src="/videos/tech-section.mp4?v=scrub-1080"
           muted
           playsInline
           preload="auto"
         />
         <video
           ref={ctaVideoRef}
-          className="absolute inset-x-0 top-0 w-full object-cover object-top transition-opacity duration-500"
+          className="absolute inset-x-0 top-0 w-full object-cover object-top"
           style={{
-            opacity: activePanel === 3 ? 1 : 0,
+            opacity: 0,
             height: 'calc(100% + 70px)',
           }}
-          src="/videos/cta-section.mp4?v=1440"
+          src="/videos/cta-section.mp4?v=scrub-1080"
           muted
           playsInline
           preload="auto"
@@ -163,7 +266,7 @@ export default function ScrollyStory() {
 
       {/* Four equal vertical sections stacked over the sticky video */}
       <div className="pointer-events-none relative z-10 -mt-[100svh]">
-        {/* Section 1 â€” Hero */}
+        {/* Section 1 — Hero */}
         <section
           id="hero"
           className="relative flex h-svh w-full items-end justify-start px-5 pb-28 pt-32 md:px-10 md:pb-32 lg:px-14"
@@ -192,7 +295,7 @@ export default function ScrollyStory() {
             >
               <Link
                 to="/about"
-                className="inline-block border border-white px-8 py-3 font-display text-sm font-semibold tracking-[0.28em] text-white transition-all duration-300 hover:bg-white hover:text-black"
+                className="inline-block border border-white bg-black px-8 py-3 font-display text-sm font-semibold tracking-[0.28em] text-white transition-all duration-300 hover:bg-white hover:text-black"
               >
                 LEARN MORE
               </Link>
@@ -208,7 +311,7 @@ export default function ScrollyStory() {
           </button>
         </section>
 
-        {/* Section 2 â€” Mission */}
+        {/* Section 2 — Mission */}
         <section
           id="mission"
           className="flex h-svh w-full items-center justify-center px-5 md:px-10 lg:px-14"
@@ -224,7 +327,7 @@ export default function ScrollyStory() {
           </div>
         </section>
 
-        {/* Section 3 â€” Technology */}
+        {/* Section 3 — Technology */}
         <section
           id="technology"
           className="flex h-svh w-full items-center justify-center px-5 md:px-10 lg:px-14"
@@ -250,7 +353,7 @@ export default function ScrollyStory() {
           </div>
         </section>
 
-        {/* Section 4 â€” CTA */}
+        {/* Section 4 — CTA */}
         <section
           id="field-trial"
           className="flex h-svh w-full items-center justify-center px-5 md:px-10 lg:px-14"

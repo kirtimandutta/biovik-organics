@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 
 const METRICS = [
-  { label: 'ACTIVE PATENTS', value: '12', accent: 'cyan' },
-  { label: 'LAB STRAINS', value: '48', accent: 'emerald' },
-  { label: 'FIELD TRIALS', value: '27', accent: 'cyan' },
-  { label: 'R&D CYCLES / YR', value: '6', accent: 'emerald' },
+  { label: 'FORMULATIONS', value: '14', accent: 'cyan' },
+  { label: 'R&D CYCLES', value: '12', accent: 'emerald' },
+  { label: 'FIELD TRIALS', value: '17', accent: 'cyan' },
+  { label: 'RESEARCH PAPERS', value: '3', accent: 'emerald' },
 ]
 
 const LAB_TAGS = ['Bangalore, IN', 'Food Security Focus', 'Multi-Project Pipeline']
